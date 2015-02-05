@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Module dependencies.
  */
@@ -10,12 +8,12 @@ var mongoose  = require('mongoose'),
  * Budget Schema
  */
 var BudgetSchema = new Schema({
-  id: Number,
-  name: String,
-  owners: [Number],
-  particpants: [Number],
-  envelopes: [Number],
-  frequency: String
+    id: Number,
+    name: String,
+    owners: [Number],
+    particpants: [Number],
+    envelopes: [Number],
+    frequency: String
 });
 
 /**

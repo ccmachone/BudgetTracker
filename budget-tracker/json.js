@@ -1,3 +1,4 @@
+/*
 User = {
 	firstName: "",
 	lastName: "",
@@ -47,3 +48,4 @@ Logins = {
 	 ip: 123,
 	 username: "asdf"
 }
+*/

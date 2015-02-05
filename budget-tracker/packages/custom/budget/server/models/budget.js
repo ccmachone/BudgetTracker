@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Module dependencies.
  */
@@ -21,15 +23,21 @@ var BudgetSchema = new Schema({
  */
 BudgetSchema.methods = {
 
-  //TODO - Create function in envelopes to get entire budget amount
     getBudgetAmount: function() {
         var amount = 0;
-        // $.each(this.envelopes, function() {
-            //loop through each envelope and get total
-        // });
+        for (var i = 0; i < this.envelopes.length; i++) {
+            amount += this.envelopes[i].getBudgetAmount();
+        }
+        return amount;
+    },
 
-    return amount;
-  }
+    getCurrentAmount: function() {
+        var amount = 0;
+        for (var i = 0; i < this.envelopes.length; i++) {
+            amount += this.envelopes[i].getCurrentAmount();
+        }
+        return amount;
+    }
 };
 
 mongoose.model('Budget', BudgetSchema);

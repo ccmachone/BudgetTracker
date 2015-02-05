@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Module dependencies.
  */
@@ -24,7 +26,14 @@ var EnvelopeSchema = new Schema({
  * Methods
  */
 EnvelopeSchema.methods = {
+	
+	getBudgetAmount: function() {
+		return this.budgetAmount;
+	},
 
+	getCurrentAmount: function() {
+		return this.currentAmount;
+	}
 };
 
 mongoose.model('Envelope', EnvelopeSchema);

@@ -44,8 +44,8 @@ Transaction = {
 //transaction amount can be negative or positive...depending on whether this is a deposit or withdrawal
 
 Logins = {
-	 userId: 123
-	 ip: 123,
-	 username: "asdf"
+	userId: 123
+	ip: 123,
+	username: "asdf"
 }
 */

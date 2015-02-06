@@ -1,4 +1,5 @@
 'use strict';
+/*jshint plusplus: false*/
 
 /**
  * Module dependencies.

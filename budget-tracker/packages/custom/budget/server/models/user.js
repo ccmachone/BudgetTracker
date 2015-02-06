@@ -23,4 +23,4 @@ UserSchema.methods = {
 
 };
 
-mongoose.model('User', UserSchema);
+mongoose.model('BudgetUser', UserSchema);

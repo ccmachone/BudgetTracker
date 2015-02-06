@@ -33,7 +33,7 @@ module.exports = function(Budget, app, auth, database) {
 // TRANSACTION
     
     //CREATE
-    app.post('/transaction/create', function(req, res, next) {
+    app.post('/transaction/', function(req, res, next) {
         transaction.create(req,res,next);
     });
 

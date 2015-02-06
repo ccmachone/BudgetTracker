@@ -10,11 +10,11 @@ var mongoose = require('mongoose'),
 
 exports.create = function(req, res, next) {
 	var envelope = new Envelope(req.body);
-	BaseController.createQuery(req, res, next, envelope);
+	BaseController.create(req, res, next, envelope);
 };
 
 exports.read = function(req, res, next, id) {
-	BaseController.readQuery(req, res, next, Envelope, id);
+	BaseController.get(req, res, next, Envelope, id);
 };
 
 exports.update = function(req, res, next, id) {
@@ -22,5 +22,5 @@ exports.update = function(req, res, next, id) {
 };
 
 exports.delete = function(req, res, next, id) {
-	BaseController.deleteQuery(req, res, next, Envelope, id);
+	BaseController.delete(req, res, next, Envelope, id);
 };

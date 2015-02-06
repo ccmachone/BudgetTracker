@@ -13,14 +13,14 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res, next) {
 
     var transaction = new Transaction(req.body);
-    BaseController.createQuery(req, res, next, transaction);
+    BaseController.create(req, res, next, transaction);
 };
 
 /**
  * READ transaction by id
  */
 exports.read = function(req, res, next, id) {
-    BaseController.readQuery(req, res, next, Transaction, id);
+    BaseController.get(req, res, next, Transaction, id);
 };
 
 /**
@@ -34,5 +34,5 @@ exports.update = function(req, res, next, id) {
  * UPDATE transaction by id
  */
 exports.delete = function(req, res, next, id) {
-    BaseController.deleteQuery(req, res, next, Transaction, id);
+    BaseController.delete(req, res, next, Transaction, id);
 }; 

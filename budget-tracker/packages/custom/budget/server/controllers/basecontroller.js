@@ -5,7 +5,7 @@ exports.respondToError = function(req, res, next, err) {
 	res.status(400).send('Bad Request');
 };
 
-exports.createQuery = function(req, res, next, schemaObj, errback, callback) {
+exports.create = function(req, res, next, schemaObj, errback, callback) {
 	errback = errback || function(err) { 
 		exports.respondToError(req, res, next, err);
 	};
@@ -23,7 +23,7 @@ exports.createQuery = function(req, res, next, schemaObj, errback, callback) {
     });
 };
 
-exports.readQuery = function(req, res, next, schemaModel, id, errback, callback) {
+exports.get = function(req, res, next, schemaModel, id, errback, callback) {
 	errback = errback || function(err) { 
 		exports.respondToError(req, res, next, err);
 	};
@@ -76,7 +76,7 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 
 };
 
-exports.deleteQuery = function(req, res, next, schemaModel, id, errback, callback) {
+exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
 	errback = errback || function(err) { 
 		exports.respondToError(req, res, next, err);
 	};

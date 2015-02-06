@@ -12,7 +12,6 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res, next) {
 
     var transaction = new Transaction(req.body);
-    console.log(req.body);
     transaction.save(function(err) {
         if (err) {
             res.status(400).send('Bad Request');
@@ -42,7 +41,6 @@ exports.read = function(req, res, next, id) {
 exports.update = function(req, res, next, id) {
 
     var query  = { id: id };
-    console.log(query);
     Transaction.findOneAndUpdate(query, {id: req.body.id}, function (err) {
         if (err) {
             res.status(400).send();

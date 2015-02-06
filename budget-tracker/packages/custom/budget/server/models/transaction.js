@@ -26,8 +26,16 @@ var TransactionSchema = new Schema({
 TransactionSchema.methods = {
 	getJSON : function() {
         var result = {};
+
         result.id = this.id;
-        
+        result.occuredOn = this.occuredOn; 
+        result.createdOn = this.createdOn; 
+        result.envelopeId = this.envelopeId; 
+        result.amount = this.amount; 
+        result.entity = this.entity; 
+        result.description = this.description; 
+        result.type = this.type; 
+
         return JSON.stringify(result);
     }
 };

@@ -1,22 +1,22 @@
 'use strict';
 
 
-exports.respondToError = function(req, res, next, err) {
-	res.status(400).send('');
+exports.respondToError = function(res, code, msg) {
+	res.status(code).send(msg);
 };
 
 exports.create = function(req, res, next, schemaObj, errback, callback) {
-	errback = errback || function(err) { 
-		exports.respondToError(req, res, next, err);
+	errback = errback || function(res, code, msg) { 
+		exports.respondToError(res, code, msg);
 	};
 
 	callback = callback || function(req, res, next) {
-			res.status(200).send('Awesome Request');
+			res.status(200).send('Create successful');
 	};
 
     schemaObj.save(function(err) {
         if (err) {
-            errback(req, res, next, err);
+            errback(res, 400, 'Create failed');
         } else {
             callback(req, res, next);
         }
@@ -24,34 +24,36 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
 };
 
 exports.get = function(req, res, next, schemaModel, id, errback, callback) {
-	errback = errback || function(err) { 
-		exports.respondToError(req, res, next, err);
+	errback = errback || function(res, code, msg) { 
+		exports.respondToError(res, code, msg);
 	};
 
 	callback = callback || function(req, res, next, obj) {
-		res.status(200).json(obj.getJSON()).send();
+		res.status(200).json(obj.getJSON()).send('Read Successful');
 	};
 
     var query  = schemaModel.where({ id: id });
     query.findOne(function (err, obj) {
-        if (err)
-        	errback(req, res, next, err);
-        else if (obj)
+        if (err) {
+        	errback(res, '400', 'Read Failed');
+        }
+        else if (obj) {
         	callback(req, res, next, obj); 
-        else
-        	errback(req, res, next, '');
+        }
+        else {
+        	errback(res, '500', 'Server Error');
+        }
     });
 };
 
 exports.update = function(req, res, next, schemaModel, id, json, errback, callback) {
-	errback = errback || function(err) { 
-		exports.respondToError(req, res, next, err);
+	errback = errback || function(res, code, msg) { 
+		exports.respondToError(res, code, msg);
 	};
 
 	callback = callback || function(req, res, next, obj) {
 		res.status(200).send('Update successful');
 	};
-
 
 	var query = {id : id };
 	var obj = {};
@@ -62,32 +64,35 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 
 	schemaModel.findOneAndUpdate(query, obj, function(err, doc) {
 			if(err) {
-				errback(req, res, next, err);
+				errback(res, '400', 'Update Failed');
 			}
 			else if(doc) {
 				callback(req, res, next, doc);
 			} else {
-				errback(req, res, next, '');
+				errback(res, '500', 'Server Error');
 			}
 		}
 	);
-
 };
 
 exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
-	errback = errback || function(err) { 
-		exports.respondToError(req, res, next, err);
+	errback = errback || function(res, code, msg) { 
+		exports.respondToError(res, code, msg);
 	};
 
 	callback = callback || function(req, res, next, obj) {
-		res.status(200).send('Id ' + id + ' successfully removed');
+		res.status(200).send('Id ' + id + ' successfully deleted');
 	};
 
     var query  = schemaModel.where({ id: id });
     query.findOneAndRemove(function (err, obj) {
-        if (err) errback(req, res, next, err);
+        if (err) {
+        	errback(res, '400', 'Delete failed');
+        }
         if (obj) {
            callback(req, res, next, obj);
+        } else {
+        	errback(res, '500', 'Server Error');
         }
     });
 };
@@ -95,7 +100,7 @@ exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
 exports.getAll = function(SchemaModel, req, res, next, errback, callback) {
 
 	errback = errback || function(err) { 
-		exports.respondToError(req, res, next, err);
+		exports.respondToError();
 	};
 
 	callback = callback || function(req, res, next, objs) {
@@ -104,7 +109,7 @@ exports.getAll = function(SchemaModel, req, res, next, errback, callback) {
 
 	SchemaModel.find(function(err, objs) {
 		if(err) {
-			errback(req, res, next, err);
+			errback();
 		} else {
 			callback(req, res, next, objs);
 		}

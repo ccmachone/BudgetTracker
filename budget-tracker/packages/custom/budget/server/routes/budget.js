@@ -35,7 +35,7 @@ module.exports = function(Budget, app, auth, database) {
 // TRANSACTION
     
     //CREATE
-    app.post('/transaction/', function(req, res, next) {
+    app.post('/transaction', function(req, res, next) {
         transactionController.create(req,res,next);
     });
 

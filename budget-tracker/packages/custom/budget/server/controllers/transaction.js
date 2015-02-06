@@ -8,15 +8,16 @@ var mongoose = require('mongoose'),
 
 
 exports.create = function(req, res, next) {
-    console.log('CREATE!');
+    console.log('my request');
+    console.log(req.body);
 
     var transaction = new Transaction(req.body);
 
     transaction.save(function(err) {
         if (err) {
-            return res.status(400);
+            res.status(400).send('Bad Request');
         } else {
-            return res.status(200);
+            res.status(200).send('Awesome Request');
         }
     });
 };

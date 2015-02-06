@@ -25,30 +25,9 @@ Budget.register(function(app, auth, database) {
     });
     
     Budget.aggregateAsset('css', 'budget.css');
+    Budget.aggregateAsset('js', 'jquery.min.js');
 
     app.set('views', __dirname + '/server/views');
-
-    /**
-      //Uncomment to use. Requires meanio@0.3.7 or above
-      // Save settings with callback
-      // Use this for saving data from administration pages
-      Budget.settings({
-          'someSetting': 'some value'
-      }, function(err, settings) {
-          //you now have the settings object
-      });
-
-      // Another save settings example this time with no callback
-      // This writes over the last settings.
-      Budget.settings({
-          'anotherSettings': 'some value'
-      });
-
-      // Get settings. Retrieves latest saved settigns
-      Budget.settings(function(err, settings) {
-          //you now have the settings object
-      });
-      */
 
     return Budget;
 });

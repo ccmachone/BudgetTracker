@@ -30,12 +30,7 @@ module.exports = function(Budget, app, auth, database) {
     });
 
 // Create a new transaction
-    app.route('/transaction/create')
-        .post(transaction.create);
-
-
-    // app.get('/transaction/:id', function(req, res, next) {
-    //     res.send('transaction id => ' + req.params.id);
-    //     console.log(Budget);
-    // });
+    app.post('/transaction/create', function(req, res, next) {
+        transaction.create(req,res,next);
+    });
 };

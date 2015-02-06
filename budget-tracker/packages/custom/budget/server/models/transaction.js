@@ -24,7 +24,7 @@ var TransactionSchema = new Schema({
  * Methods
  */
 TransactionSchema.methods = {
-
+	
 };
 
 mongoose.model('Transaction', TransactionSchema);

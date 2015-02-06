@@ -10,11 +10,9 @@ var mongoose = require('mongoose'),
  * CREATE transaction
  */
 exports.create = function(req, res, next) {
-    console.log('my request');
-    console.log(req.body);
 
     var transaction = new Transaction(req.body);
-
+    console.log(req.body);
     transaction.save(function(err) {
         if (err) {
             res.status(400).send('Bad Request');
@@ -41,15 +39,29 @@ exports.read = function(req, res, next, id) {
 /**
  * UPDATE transaction by id
  */
-exports.update = function(req, res, next) {
+exports.update = function(req, res, next, id) {
 
-    res.stats(500).send();
+    var query  = { id: id };
+    console.log(query);
+    Transaction.findOneAndUpdate(query, {id: req.body.id}, function (err) {
+        if (err) {
+            res.status(400).send();
+        } else {
+            res.status(200).send('Id ' + req.body.id + ' successfully updated');
+        }
+    });
 };
 
 /**
  * UPDATE transaction by id
  */
-exports.delete = function(req, res, next) {
-
-    res.stats(500).send();
+exports.delete = function(req, res, next, id) {
+    
+    var query  = Transaction.where({ id: id });
+    query.findOneAndRemove(function (err, transaction) {
+        if (err) res.status(400).send();
+        if (transaction) {
+            res.status(200).send('Id ' + id + ' successfully removed');
+        }
+    });
 };

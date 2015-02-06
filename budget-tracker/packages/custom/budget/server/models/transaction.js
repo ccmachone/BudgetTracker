@@ -27,6 +27,7 @@ TransactionSchema.methods = {
 	getJSON : function() {
         var result = {};
         result.id = this.id;
+        
         return JSON.stringify(result);
     }
 };

@@ -42,6 +42,16 @@ module.exports = function(Budget, app, auth, database) {
         transaction.read(req,res,next, req.params.id);
     });
 
+    //UPDATE
+    app.post('/transaction/update/:id', function(req, res, next) {
+        transaction.update(req,res,next, req.params.id);
+    });
+
+    //UPDATE
+    app.post('/transaction/delete/:id', function(req, res, next) {
+        transaction.delete(req,res,next,req.params.id);
+    });
+
 
 // Database routes
 

@@ -52,7 +52,7 @@ exports.update = function(req, res, next, id) {
             if (err) {
                 res.status(400).send();
             } else {
-                res.status(200).send('Id ' + id + ' changed to ' + req.body.id);
+                res.status(200).send('Update successful');
         }
     });
 };

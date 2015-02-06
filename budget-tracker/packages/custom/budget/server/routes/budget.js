@@ -43,12 +43,12 @@ module.exports = function(Budget, app, auth, database) {
     });
 
     //UPDATE
-    app.post('/transaction/update/:id', function(req, res, next) {
+    app.put('/transaction/:id', function(req, res, next) {
         transaction.update(req,res,next, req.params.id);
     });
 
-    //UPDATE
-    app.post('/transaction/delete/:id', function(req, res, next) {
+    //DELETE
+    app.delete('/transaction/:id', function(req, res, next) {
         transaction.delete(req,res,next,req.params.id);
     });
 

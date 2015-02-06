@@ -29,8 +29,15 @@ module.exports = function(Budget, app, auth, database) {
         });
     });
 
-// Create a new transaction
+// TRANSACTION
+    
+    //CREATE
     app.post('/transaction/create', function(req, res, next) {
         transaction.create(req,res,next);
+    });
+
+    //READ
+    app.get('/transaction/:id', function(req, res, next) {
+        transaction.read(req,res,next, req.params.id);
     });
 };

@@ -6,7 +6,9 @@
 var mongoose = require('mongoose'),
     Transaction = mongoose.model('Transaction');
 
-
+/**
+ * CREATE transaction
+ */
 exports.create = function(req, res, next) {
     console.log('my request');
     console.log(req.body);
@@ -23,25 +25,31 @@ exports.create = function(req, res, next) {
 };
 
 /**
- * Send Transaction
+ * READ transaction by id
  */
-exports.me = function(req, res) {
-    res.json(req.transaction || null);
-};
+exports.read = function(req, res, next, id) {
 
-/**
- * Find transaction by id
- */
-exports.transaction = function(req, res, next, id) {
-    Transaction
-    .findOne({
-        _id: id
-    })
-    .exec(function(err, transaction) {
-        if (err) return next(err);
-        if (!transaction) return next(new Error('Failed to load transaction ' + id));
-        req.profile = transaction;
-        next();
+    var query  = Transaction.where({ id: id });
+    query.findOne(function (err, transaction) {
+        if (err) res.status(400).send();
+        if (transaction) {
+            res.status(200).json(transaction.getJSON()).send();
+        }
     });
 };
 
+/**
+ * UPDATE transaction by id
+ */
+exports.update = function(req, res, next) {
+
+    res.stats(500).send();
+};
+
+/**
+ * UPDATE transaction by id
+ */
+exports.delete = function(req, res, next) {
+
+    res.stats(500).send();
+};

@@ -35,4 +35,4 @@ exports.update = function(req, res, next, id) {
  */
 exports.delete = function(req, res, next, id) {
     BaseController.deleteQuery(req, res, next, Transaction, id);
-};
+}; 

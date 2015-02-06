@@ -35,7 +35,7 @@ module.exports = function(Budget, app, auth, database) {
 // TRANSACTION
     
     //CREATE
-    app.post('/transaction/create', function(req, res, next) {
+    app.post('/transaction/', function(req, res, next) {
         transactionController.create(req,res,next);
     });
 
@@ -45,19 +45,19 @@ module.exports = function(Budget, app, auth, database) {
     });
 
     //UPDATE
-    app.post('/transaction/update/:id', function(req, res, next) {
+    app.put('/transaction/:id', function(req, res, next) {
         transactionController.update(req,res,next, req.params.id);
     });
 
     //DELETE
-    app.post('/transaction/delete/:id', function(req, res, next) {
+    app.delete('/transaction/:id', function(req, res, next) {
         transactionController.delete(req,res,next,req.params.id);
     });
 
 // BUDGET
 
     //CREATE
-    app.post('/budget/create', function(req, res, next) {
+    app.post('/budget', function(req, res, next) {
         budgetController.create(req, res, next);
     });
 
@@ -67,19 +67,19 @@ module.exports = function(Budget, app, auth, database) {
     });
 
     //UPDATE
-    app.post('/budget/update/:id', function(req, res, next) {
+    app.put('/budget/:id', function(req, res, next) {
         budgetController.update(req,res,next, req.params.id);
     });
 
     //DELETE
-    app.post('/budget/delete/:id', function(req, res, next) {
+    app.delete('/budget/:id', function(req, res, next) {
         budgetController.delete(req,res,next,req.params.id);
     });
 
 // ENVELOPE
 
     //CREATE
-    app.post('/envelope/create', function(req, res, next) {
+    app.post('/envelope', function(req, res, next) {
         envelopeController.create(req, res, next);
     });
 
@@ -89,12 +89,12 @@ module.exports = function(Budget, app, auth, database) {
     });
 
     //UPDATE
-    app.post('/envelope/update/:id', function(req, res, next) {
+    app.put('/envelope/:id', function(req, res, next) {
         envelopeController.update(req,res,next, req.params.id);
     });
 
     //DELETE
-    app.post('/envelope/delete/:id', function(req, res, next) {
+    app.delete('/envelope/:id', function(req, res, next) {
         envelopeController.delete(req,res,next,req.params.id);
     });
 

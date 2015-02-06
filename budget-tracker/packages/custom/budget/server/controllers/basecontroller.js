@@ -49,7 +49,7 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 	};
 
 	callback = callback || function(obj) {
-		res.status(200).send('Id ' + id + ' changed to ' + obj.id);
+		res.status(200).send('Update successful');
 	};
 
 

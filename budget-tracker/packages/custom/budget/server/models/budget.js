@@ -14,7 +14,7 @@ var BudgetSchema = new Schema({
     id: Number,
     name: String,
     owners: [Number],
-    particpants: [Number],
+    participants: [Number],
     envelopes: [Number],
     frequency: String
 });
@@ -38,6 +38,19 @@ BudgetSchema.methods = {
             amount += this.envelopes[i].getCurrentAmount();
         }
         return amount;
+    },
+
+    getJSON : function() {
+        var result = {};
+
+        result.id = this.id;
+        result.name = this.name; 
+        result.owners = this.owners; 
+        result.participants = this.participants; 
+        result.envelopes = this.envelopes; 
+        result.frequency = this.frequency; 
+
+        return JSON.stringify(result);
     }
 };
 

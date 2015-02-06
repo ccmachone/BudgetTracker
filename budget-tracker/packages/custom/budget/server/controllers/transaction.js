@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
+    BaseController = require('./basecontroller'),
     Transaction = mongoose.model('Transaction');
 
 /**
@@ -12,61 +13,26 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res, next) {
 
     var transaction = new Transaction(req.body);
-    transaction.save(function(err) {
-        if (err) {
-            res.status(400).send('Bad Request');
-        } else {
-            res.status(200).send('Awesome Request');
-        }
-    });
+    BaseController.createQuery(req, res, next, transaction);
 };
 
 /**
  * READ transaction by id
  */
 exports.read = function(req, res, next, id) {
-
-    var query  = Transaction.where({ id: id });
-    query.findOne(function (err, transaction) {
-        if (err) res.status(400).send();
-        if (transaction) {
-            res.status(200).json(transaction.getJSON()).send();
-        }
-    });
+    BaseController.readQuery(req, res, next, Transaction, id);
 };
 
 /**
  * UPDATE transaction by id
  */
 exports.update = function(req, res, next, id) {
-
-    var query  = { id: id };
-    Transaction.findOneAndUpdate(query, {
-        id: req.body.id,
-        envelopeId: req.body.envelopeId,
-        amount: req.body.amount,
-        entity: req.body.entity,
-        description: req.body.description,
-        type: req.body.type
-        }, function (err) {
-            if (err) {
-                res.status(400).send();
-            } else {
-                res.status(200).send('Id ' + id + ' changed to ' + req.body.id);
-        }
-    });
+    BaseController.update(req, res, next, Transaction, id, req.body);
 };
 
 /**
  * UPDATE transaction by id
  */
 exports.delete = function(req, res, next, id) {
-    
-    var query  = Transaction.where({ id: id });
-    query.findOneAndRemove(function (err, transaction) {
-        if (err) res.status(400).send();
-        if (transaction) {
-            res.status(200).send('Id ' + id + ' successfully removed');
-        }
-    });
+    BaseController.deleteQuery(req, res, next, Transaction, id);
 };

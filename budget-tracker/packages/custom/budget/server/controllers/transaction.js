@@ -41,11 +41,18 @@ exports.read = function(req, res, next, id) {
 exports.update = function(req, res, next, id) {
 
     var query  = { id: id };
-    Transaction.findOneAndUpdate(query, {id: req.body.id}, function (err) {
-        if (err) {
-            res.status(400).send();
-        } else {
-            res.status(200).send('Id ' + req.body.id + ' successfully updated');
+    Transaction.findOneAndUpdate(query, {
+        id: req.body.id,
+        envelopeId: req.body.envelopeId,
+        amount: req.body.amount,
+        entity: req.body.entity,
+        description: req.body.description,
+        type: req.body.type
+        }, function (err) {
+            if (err) {
+                res.status(400).send();
+            } else {
+                res.status(200).send('Id ' + id + ' changed to ' + req.body.id);
         }
     });
 };

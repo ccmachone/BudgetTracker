@@ -11,8 +11,8 @@ var mongoose  = require('mongoose'),
  */
 var TransactionSchema = new Schema({
     id: Number,
-    occuredOn: Date,
-    createdOn: Date,
+    occuredOn: { type: Date, default: Date.now },
+    createdOn: { type: Date, default: Date.now },
     envelopeId: Number,
     amount: Number,
     entity: String,

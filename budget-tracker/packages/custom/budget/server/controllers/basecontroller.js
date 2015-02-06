@@ -10,7 +10,7 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
 		exports.respondToError(req, res, next, err);
 	};
 
-	callback = callback || function() {
+	callback = callback || function(req, res, next) {
 			res.status(200).send('Awesome Request');
 	};
 
@@ -18,7 +18,7 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
         if (err) {
             errback(req, res, next, err);
         } else {
-            callback();
+            callback(req, res, next);
         }
     });
 };
@@ -28,18 +28,18 @@ exports.get = function(req, res, next, schemaModel, id, errback, callback) {
 		exports.respondToError(req, res, next, err);
 	};
 
-	callback = callback || function(obj) {
+	callback = callback || function(req, res, next, obj) {
 		res.status(200).json(obj.getJSON()).send();
 	};
 
     var query  = schemaModel.where({ id: id });
     query.findOne(function (err, obj) {
         if (err)
-        	errback(err);
+        	errback(req, res, next, err);
         else if (obj)
-        	callback(obj); 
+        	callback(req, res, next, obj); 
         else
-        	errback('');
+        	errback(req, res, next, '');
     });
 };
 
@@ -48,7 +48,7 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 		exports.respondToError(req, res, next, err);
 	};
 
-	callback = callback || function(obj) {
+	callback = callback || function(req, res, next, obj) {
 		res.status(200).send('Update successful');
 	};
 
@@ -81,15 +81,15 @@ exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
 		exports.respondToError(req, res, next, err);
 	};
 
-	callback = callback || function(obj) {
+	callback = callback || function(req, res, next, obj) {
 		res.status(200).send('Id ' + id + ' successfully removed');
 	};
 
     var query  = schemaModel.where({ id: id });
     query.findOneAndRemove(function (err, obj) {
-        if (err) errback(err);
+        if (err) errback(req, res, next, err);
         if (obj) {
-           callback(obj);
+           callback(req, res, next, obj);
         }
     });
 };
@@ -100,15 +100,15 @@ exports.getAll = function(SchemaModel, req, res, next, errback, callback) {
 		exports.respondToError(req, res, next, err);
 	};
 
-	callback = callback || function(objs) {
+	callback = callback || function(req, res, next, objs) {
 		res.status(200).send(objs);
 	};
 
 	SchemaModel.find(function(err, objs) {
 		if(err) {
-			errback(err);
+			errback(req, res, next, err);
 		} else {
-			callback(objs);
+			callback(req, res, next, objs);
 		}
 	});
 };

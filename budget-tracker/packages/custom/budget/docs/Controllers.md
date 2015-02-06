@@ -51,3 +51,43 @@ json - object to update database with
 #### Additional Notes
 
 *The errback/callback has default values, although if we want to customize how individual "create" api endpoints respond we can do so by giving them anonoymous functions.
+
+#### Examples
+
+Here is some example code for envelope CRUD methods
+
+```javascript
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'),
+	BaseController = require('./basecontroller'),
+    Envelope = mongoose.model('Envelope');
+
+
+exports.create = function(req, res, next) {
+	var envelope = new Envelope(req.body);
+	BaseController.create(req, res, next, envelope, function(req, res, next, err) {
+		console.log('custom errback function');
+		res.status(400).send('err');
+	}, function(req, res, next, obj) {
+		console.log('custom callback function');
+		res.status(200).send('great success');
+	});
+};
+
+exports.read = function(req, res, next, id) {
+	BaseController.get(req, res, next, Envelope, id);
+};
+
+exports.update = function(req, res, next, id) {
+	BaseController.update(req, res, next, Envelope, id, req.body);
+};
+
+exports.delete = function(req, res, next, id) {
+	BaseController.delete(req, res, next, Envelope, id);
+};
+
+```

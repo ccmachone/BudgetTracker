@@ -11,11 +11,10 @@ var mongoose = require('mongoose'),
 
 var databaseRetriever = function(SchemaModel, req, res, next) {
 	SchemaModel.find(function(err, objs) {
-		res.status(200);
 		if(err) {
-			res.send('Something went wrong with the database lookup');
+			res.status(400).send('Something went wrong with the database lookup');
 		} else {
-			res.send(objs);
+			res.status(200).send(objs);
 		}
 	});
 };

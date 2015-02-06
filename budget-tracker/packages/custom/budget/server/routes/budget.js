@@ -100,6 +100,16 @@ module.exports = function(Budget, app, auth, database) {
 
 // Database routes
 
+    app.get('/database', function(req, res, next) {
+        console.log(req.headers.host + '/database/budgets');
+        res.status(200).send('<a href="http://' + req.headers.host + '/database/budgets">Budgets</a> <br />' +
+            '<a href="http://' + req.headers.host + '/database/transactions">Transactions</a> <br />' +
+            '<a href="http://' + req.headers.host + '/database/users">Users</a> <br />' +
+            '<a href="http://' + req.headers.host + '/database/profiles">Profiles</a> <br />' +
+            '<a href="http://' + req.headers.host + '/database/envelopes">Envelopes</a> <br />' +
+            '<a href="http://' + req.headers.host + '/database/logins">Logins</a> <br />');
+    });
+
     app.get('/database/transactions', function(req, res, next) {
         databaseAccessController.getTransactions(req, res, next);
     });

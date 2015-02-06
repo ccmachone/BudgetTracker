@@ -2,7 +2,7 @@
 
 
 exports.respondToError = function(req, res, next, err) {
-	res.status(400).send('Bad Request');
+	res.status(400).send('');
 };
 
 exports.create = function(req, res, next, schemaObj, errback, callback) {
@@ -65,11 +65,11 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 	//and doc is always null...?
 	var huh = schemaModel.findOneAndUpdate(query, obj, function(doc) {
 			console.log(doc);
-			if(doc) {
-				callback(doc);
-			} else {
-				errback('');
-			}
+			// if(doc) {
+			// 	callback(doc);
+			// } else {
+			// 	errback('');
+			// }
 		}
 	);
 	console.log(huh);

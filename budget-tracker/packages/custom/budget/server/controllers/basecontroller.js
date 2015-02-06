@@ -60,19 +60,17 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 		obj[key]=json[key];
 	}
 
-	//no way to tell if this succeeds or not
-	//huh is always the same object
-	//and doc is always null...?
-	var huh = schemaModel.findOneAndUpdate(query, obj, function(doc) {
-			console.log(doc);
-			// if(doc) {
-			// 	callback(doc);
-			// } else {
-			// 	errback('');
-			// }
+	schemaModel.findOneAndUpdate(query, obj, function(err, doc) {
+			if(err) {
+				errback(req, res, next, err);
+			}
+			else if(doc) {
+				callback(req, res, next, doc);
+			} else {
+				errback(req, res, next, '');
+			}
 		}
 	);
-	console.log(huh);
 
 };
 

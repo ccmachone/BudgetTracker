@@ -11,12 +11,15 @@ var mongoose  = require('mongoose'),
  * Budget Schema
  */
 var BudgetSchema = new Schema({
-    id: Number,
+    id: Number, //use _id (it's created by default)
     name: String,
     owners: [Number],
     participants: [Number],
     envelopes: [Number],
-    frequency: String
+    frequency: {
+        type: String,
+        enum: ["monthly"]   //add weekly, daily, etc. for v1.5 or w/e
+    }
 });
 
 /**

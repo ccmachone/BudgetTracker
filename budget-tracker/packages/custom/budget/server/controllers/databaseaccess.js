@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-	BaseController = require('./BaseController'),
+	BaseController = require('./basecontroller'),
 	Transaction = mongoose.model('Transaction'),
 	User = mongoose.model('User'),
 	Profile = mongoose.model('Profile'),

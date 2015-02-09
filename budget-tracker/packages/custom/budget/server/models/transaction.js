@@ -10,7 +10,7 @@ var mongoose  = require('mongoose'),
  * Budget Schema
  */
 var TransactionSchema = new Schema({
-    id: Number,
+    id: Number, //use _id (created by default)
     occuredOn: { type: Date, default: Date.now },
     createdOn: { type: Date, default: Date.now },
     envelopeId: Number,

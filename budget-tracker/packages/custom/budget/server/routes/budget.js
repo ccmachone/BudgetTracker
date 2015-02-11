@@ -6,10 +6,17 @@ var transactionController = require('../controllers/transaction'),
     databaseAccessController = require('../controllers/databaseaccess'),
     budgetController = require('../controllers/budget'),
     envelopeController = require('../controllers/envelope'),
+    passport = require('passport'),
     config = require('meanio').loadConfig();
 
 // The Package is past automatically as first parameter
 module.exports = function(Budget, app, auth, database) {
+
+    // app.post('/login', passport.authenticate('local', {
+    //         successRedirect: '/',
+    //         failureRedirect: '/login'
+    //     })
+    // );
 
     app.get('/budget/example/anyone', function(req, res, next) {
         res.send('Anyone can access this');

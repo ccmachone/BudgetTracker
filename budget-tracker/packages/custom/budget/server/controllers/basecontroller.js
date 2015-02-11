@@ -10,15 +10,15 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
 		exports.respondToError(res, code, msg);
 	};
 
-	callback = callback || function(req, res, next) {
-			res.status(200).send('Create successful');
+	callback = callback || function(req, res, next, obj) {
+			res.status(200).json(JSON.stringify(obj._id));
 	};
 
-    schemaObj.save(function(err) {
+    schemaObj.save(function(err, obj) {
         if (err) {
             errback(res, 400, 'Create failed');
         } else {
-            callback(req, res, next);
+            callback(req, res, next, obj);
         }
     });
 };
@@ -29,7 +29,7 @@ exports.get = function(req, res, next, schemaModel, id, errback, callback) {
 	};
 
 	callback = callback || function(req, res, next, obj) {
-		res.status(200).json(obj.getJSON()).send('Read Successful');
+		res.status(200).json(obj.getJSON());
 	};
 
     var query  = schemaModel.where({ id: id });

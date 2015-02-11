@@ -76,7 +76,7 @@ exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
 	};
 
 	callback = callback || function(req, res, next, obj) {
-		res.status(200).send('Id ' + id + ' successfully deleted');
+		res.status(200).send();
 	};
 
     var query  = schemaModel.where({ id: id });

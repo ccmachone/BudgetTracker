@@ -52,17 +52,12 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 	};
 
 	callback = callback || function(req, res, next, obj) {
-		res.status(200).send('Update successful');
+		res.status(200).send();
 	};
 
-	var query = {id : id };
-	var obj = {};
+	var query = {id : id};
 
-	for(var key in json) {
-		obj[key]=json[key];
-	}
-
-	schemaModel.findOneAndUpdate(query, obj, function(err, doc) {
+	schemaModel.findOneAndUpdate(query, json, function(err, doc) {
 			if(err) {
 				errback(res, '400', 'Update Failed');
 			}

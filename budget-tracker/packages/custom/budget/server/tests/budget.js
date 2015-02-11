@@ -14,6 +14,7 @@ Transaction = mongoose.model('Transaction');
  * Globals
  */
 var transaction1, transaction2;
+var t1id, t2id;
 
 /**
  * Test Suites
@@ -48,11 +49,13 @@ describe('<Unit Test>', function() {
         });
 
         describe('Method Save', function() {
+
             it('should save user', function(done) {
                 var transaction = new Transaction(transaction1);
 
                 transaction.save(function(err, obj) {
                     if (!err) {
+                        t1id = obj._id;
                         done();
                     }
                 }); 
@@ -60,7 +63,14 @@ describe('<Unit Test>', function() {
         });
 
         after(function(done) {
-            done();
+
+            var query  = Transaction.where({ _id: t1id });
+
+            query.findOneAndRemove(function (err) {
+                if (!err) {
+                    done();
+                }
+            });
         });
     });
 });

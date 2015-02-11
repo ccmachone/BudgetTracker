@@ -80,6 +80,7 @@ exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
 	};
 
     var query  = schemaModel.where({ _id: id });
+    
     query.findOneAndRemove(function (err, obj) {
         if (err) {
         	errback(res, '500', 'Server Error');

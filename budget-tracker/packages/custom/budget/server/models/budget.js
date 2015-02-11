@@ -18,7 +18,7 @@ var BudgetSchema = new Schema({
     envelopes: [Number],
     frequency: {
         type: String,
-        enum: ["monthly"]   //add weekly, daily, etc. for v1.5 or w/e
+        enum: ['monthly']   //add weekly, daily, etc. for v1.5 or w/e
     }
 });
 

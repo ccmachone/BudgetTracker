@@ -31,8 +31,8 @@ exports.get = function(req, res, next, schemaModel, id, errback, callback) {
 	callback = callback || function(req, res, next, obj) {
 		res.status(200).json(obj.getJSON());
 	};
-
-    var query  = schemaModel.where({ id: id });
+	
+    var query  = schemaModel.where({ _id: id });
     query.findOne(function (err, obj) {
         if (err) {
         	errback(res, '400', 'Read Failed');

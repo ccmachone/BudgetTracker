@@ -9,7 +9,7 @@ var mongoose  = require('mongoose'),
 /**     
  * Budget Schema
  */
-var UserProfileSchema = new Schema({
+var ProfileSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User'
@@ -22,6 +22,6 @@ var UserProfileSchema = new Schema({
 /**
  * Methods
  */
-UserProfileSchema.methods = {};
+ProfileSchema.methods = {};
 
-mongoose.model('UserProfile', UserProfileSchema);
+mongoose.model('Profile', ProfileSchema);

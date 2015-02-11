@@ -6,6 +6,7 @@ var transactionController = require('../controllers/transaction'),
     databaseAccessController = require('../controllers/databaseaccess'),
     budgetController = require('../controllers/budget'),
     envelopeController = require('../controllers/envelope'),
+    profileController = require('../controllers/profile'),
     passport = require('passport'),
     config = require('meanio').loadConfig();
 
@@ -75,6 +76,28 @@ module.exports = function(Budget, app, auth, database) {
     //DELETE
     app.delete('/envelope/:id', function(req, res, next) {
         envelopeController.delete(req,res,next,req.params.id);
+    });
+
+// PROFILE
+
+    //CREATE
+    app.post('/profile', function(req, res, next) {
+        profileController.create(req, res, next);
+    });
+
+    //READ
+    app.get('/profile/:id', function(req, res, next) {
+        profileController.read(req, res, next, req.params.id);
+    });
+
+    //UPDATE
+    app.put('/profile/:id', function(req, res, next) {
+        profileController.update(req,res,next, req.params.id);
+    });
+
+    //DELETE
+    app.delete('/profile/:id', function(req, res, next) {
+        profileController.delete(req,res,next,req.params.id);
     });
 
 // Database routes

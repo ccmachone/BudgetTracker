@@ -31,17 +31,17 @@ exports.get = function(req, res, next, schemaModel, id, errback, callback) {
 	callback = callback || function(req, res, next, obj) {
 		res.status(200).json(obj.getJSON());
 	};
-
-    var query  = schemaModel.where({ id: id });
+	
+    var query  = schemaModel.where({ _id: id });
     query.findOne(function (err, obj) {
         if (err) {
-        	errback(res, '400', 'Read Failed');
+        	errback(res, '500', 'Server Error');
         }
         else if (obj) {
         	callback(req, res, next, obj); 
         }
         else {
-        	errback(res, '500', 'Server Error');
+        	errback(res, '400', 'Could not find');
         }
     });
 };
@@ -55,16 +55,16 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 		res.status(200).send();
 	};
 
-	var query = {id : id};
+	var query = {_id : id};
 
 	schemaModel.findOneAndUpdate(query, json, function(err, doc) {
 			if(err) {
-				errback(res, '400', 'Update Failed');
+				errback(res, '500', 'Server Error');
 			}
 			else if(doc) {
 				callback(req, res, next, doc);
 			} else {
-				errback(res, '500', 'Server Error');
+				errback(res, '400', 'Could not update');
 			}
 		}
 	);
@@ -79,15 +79,15 @@ exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
 		res.status(200).send();
 	};
 
-    var query  = schemaModel.where({ id: id });
+    var query  = schemaModel.where({ _id: id });
     query.findOneAndRemove(function (err, obj) {
         if (err) {
-        	errback(res, '400', 'Delete failed');
+        	errback(res, '500', 'Server Error');
         }
         if (obj) {
            callback(req, res, next, obj);
         } else {
-        	errback(res, '500', 'Server Error');
+        	errback(res, '400', 'Could not delete');
         }
     });
 };

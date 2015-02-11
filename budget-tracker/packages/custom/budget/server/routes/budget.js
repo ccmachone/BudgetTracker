@@ -15,88 +15,88 @@ module.exports = function(Budget, app, auth, database) {
 // TRANSACTION
     
     //CREATE
-    app.post('/transaction', function(req, res, next) {
+    app.post('/transaction', auth.requiresLogin, function(req, res, next) {
         transactionController.create(req,res,next);
     });
 
     //READ
-    app.get('/transaction/:id', function(req, res, next) {
+    app.get('/transaction/:id', auth.requiresLogin, function(req, res, next) {
         transactionController.read(req, res, next, req.params.id);
     });
 
     //UPDATE
-    app.put('/transaction/:id', function(req, res, next) {
+    app.put('/transaction/:id', auth.requiresLogin, function(req, res, next) {
         transactionController.update(req,res,next, req.params.id);
     });
 
     //DELETE
-    app.delete('/transaction/:id', function(req, res, next) {
+    app.delete('/transaction/:id', auth.requiresLogin, function(req, res, next) {
         transactionController.delete(req,res,next,req.params.id);
     });
 
 // BUDGET
 
     //CREATE
-    app.post('/budget', function(req, res, next) {
+    app.post('/budget', auth.requiresLogin, function(req, res, next) {
         budgetController.create(req, res, next);
     });
 
     //READ
-    app.get('/budget/:id', function(req, res, next) {
+    app.get('/budget/:id', auth.requiresLogin, function(req, res, next) {
         budgetController.read(req, res, next, req.params.id);
     });
 
     //UPDATE
-    app.put('/budget/:id', function(req, res, next) {
+    app.put('/budget/:id', auth.requiresLogin, function(req, res, next) {
         budgetController.update(req,res,next, req.params.id);
     });
 
     //DELETE
-    app.delete('/budget/:id', function(req, res, next) {
+    app.delete('/budget/:id', auth.requiresLogin, function(req, res, next) {
         budgetController.delete(req,res,next,req.params.id);
     });
 
 // ENVELOPE
 
     //CREATE
-    app.post('/envelope', function(req, res, next) {
+    app.post('/envelope', auth.requiresLogin, function(req, res, next) {
         envelopeController.create(req, res, next);
     });
 
     //READ
-    app.get('/envelope/:id', function(req, res, next) {
+    app.get('/envelope/:id', auth.requiresLogin, function(req, res, next) {
         envelopeController.read(req, res, next, req.params.id);
     });
 
     //UPDATE
-    app.put('/envelope/:id', function(req, res, next) {
+    app.put('/envelope/:id', auth.requiresLogin, function(req, res, next) {
         envelopeController.update(req,res,next, req.params.id);
     });
 
     //DELETE
-    app.delete('/envelope/:id', function(req, res, next) {
+    app.delete('/envelope/:id', auth.requiresLogin, function(req, res, next) {
         envelopeController.delete(req,res,next,req.params.id);
     });
 
 // PROFILE
 
     //CREATE
-    app.post('/profile', function(req, res, next) {
+    app.post('/profile', auth.requiresLogin, function(req, res, next) {
         profileController.create(req, res, next);
     });
 
     //READ
-    app.get('/profile/:id', function(req, res, next) {
+    app.get('/profile/:id', auth.requiresLogin, function(req, res, next) {
         profileController.read(req, res, next, req.params.id);
     });
 
     //UPDATE
-    app.put('/profile/:id', function(req, res, next) {
+    app.put('/profile/:id', auth.requiresLogin, function(req, res, next) {
         profileController.update(req,res,next, req.params.id);
     });
 
     //DELETE
-    app.delete('/profile/:id', function(req, res, next) {
+    app.delete('/profile/:id', auth.requiresLogin, function(req, res, next) {
         profileController.delete(req,res,next,req.params.id);
     });
 

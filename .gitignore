@@ -1,0 +1,9 @@
+budget-tracker/node_modules/**
+budget-tracker/npm-debug.log
+budget-tracker/packages/contrib/**
+npm-debug.log
+
+
+
+
+

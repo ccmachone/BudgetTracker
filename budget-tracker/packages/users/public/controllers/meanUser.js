@@ -44,6 +44,9 @@ angular.module('mean.users')
             // authentication OK
             $scope.loginError = 0;
             $rootScope.user = response.user;
+            window.user = response.user;
+            Global.user = $rootScope.user;
+            Global.authenticated = !! $rootScope.user;
             $rootScope.$emit('loggedin');
             if (response.redirect) {
               if (window.location.href === response.redirect) {
@@ -103,6 +106,7 @@ angular.module('mean.users')
             // authentication OK
             $scope.registerError = 0;
             $rootScope.user = $scope.user;
+            window.user = $scope.user;
             Global.user = $rootScope.user;
             Global.authenticated = !! $rootScope.user;
             $rootScope.$emit('loggedin');

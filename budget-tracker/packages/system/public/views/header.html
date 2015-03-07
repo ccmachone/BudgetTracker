@@ -3,6 +3,7 @@
     <a class="navbar-brand" ui-sref="home" mean-token="'site-title'">Budget Tracker</a>
   </div>
 
+
   <div class="left pull-left">
     <ul class="navbar-nav nav">
       <li data-ng-repeat="item in ::menus.main" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
@@ -29,6 +30,8 @@
           {{global.user.name}} <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
+          <li><a ui-sref='account'>My Account</a>
+          </li>
           <li><a href="/logout">Log Out</a>
           </li>
         </ul>

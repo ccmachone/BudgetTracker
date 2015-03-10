@@ -87,7 +87,7 @@ describe('BudgetTracker Model Unit Tests:', function() {
                 _id: mongoose.Types.ObjectId(), //use _id (created by default)
                 occuredOn: '2015-02-11T02:58:22.294Z',
                 createdOn: '2015-02-11T02:58:22.294Z',
-                envelopeId: 1,
+                envelopeId: envelope1._id,
                 amount: 100,
                 entity: 'Your Mom',
                 description: 'She\'s fat',
@@ -98,7 +98,7 @@ describe('BudgetTracker Model Unit Tests:', function() {
                 _id: mongoose.Types.ObjectId(), //use _id (created by default)
                 occuredOn: '2015-02-11T02:58:22.294Z',
                 createdOn: '2015-02-11T02:58:22.294Z',
-                envelopeId: 2,
+                envelopeId: envelope2._id,
                 amount: 100,
                 entity: 'Your Dad',
                 description: 'He\'s fat',

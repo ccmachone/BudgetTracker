@@ -36,3 +36,13 @@ exports.update = function(req, res, next, id) {
 exports.delete = function(req, res, next, id) {
     BaseController.delete(req, res, next, Transaction, id);
 }; 
+
+exports.getTransactions = function(req, res, next, envelope_id) {
+	Transaction.find({envelopeId : envelope_id}, function(err, transactions) {
+        if(err) {
+            BaseController.respondToError(res, 400, 'error getting transactions', err);
+        } else {
+            res.status(200).json(transactions);
+        }
+	});
+};

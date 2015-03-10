@@ -106,10 +106,13 @@ module.exports = function(Budget, app, auth, database) {
         envelopeController.getEnvelopes(req, res, next, req.params.budgetId);
     });
 
+    app.get('/transactions/:envelopeId', auth.requiresLogin, function(req, res, next) {
+        transactionController.getTransactions(req, res, next, req.params.envelopeId);
+    });
+
 // Database routes
 
     app.get('/database', function(req, res, next) {
-        console.log(req.headers.host + '/database/budgets');
         res.status(200).send('<a href="http://' + req.headers.host + '/database/budgets">Budgets</a> <br />' +
             '<a href="http://' + req.headers.host + '/database/transactions">Transactions</a> <br />' +
             '<a href="http://' + req.headers.host + '/database/users">Users</a> <br />' +

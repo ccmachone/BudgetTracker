@@ -27,7 +27,10 @@ exports.delete = function(req, res, next, id) {
 
 exports.getEnvelopes = function(req, res, next, budget_id) {
 	Envelope.find({budgetId : budget_id}, function(err, envelopes) {
-		console.log(envelopes);
-		res.status(200).json(envelopes);
+		if(err) {
+			BaseController.respondToError(res, 400, 'error getting envelopes', err);
+		} else {
+			res.status(200).json(envelopes);
+		}
 	});
 };

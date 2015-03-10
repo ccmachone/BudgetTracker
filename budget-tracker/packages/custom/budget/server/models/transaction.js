@@ -10,11 +10,17 @@ var mongoose  = require('mongoose'),
  * Budget Schema
  */
 var TransactionSchema = new Schema({
-    id: Number, //use _id (created by default)
     occuredOn: { type: Date, default: Date.now },
     createdOn: { type: Date, default: Date.now },
-    envelopeId: Number,
-    amount: Number,
+    envelopeId: {
+        type: Schema.ObjectId,
+        ref: 'Envelope',
+        required : 'envelopeId is required'
+    },
+    amount: {
+        type: Number,
+        required : 'amount is required'
+    },
     entity: String,
     description: String,
     type: String

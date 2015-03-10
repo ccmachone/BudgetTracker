@@ -1,13 +1,16 @@
 'use strict';
 
 
-exports.respondToError = function(res, code, msg) {
-	res.status(code).send(msg);
+exports.respondToError = function(res, code, msg, devMsg) {
+	if(process.env.NODE_ENV !== 'production' && devMsg) {
+		res.status(code).send(devMsg);
+	} else 
+		res.status(code).send(msg);
 };
 
 exports.create = function(req, res, next, schemaObj, errback, callback) {
-	errback = errback || function(res, code, msg) { 
-		exports.respondToError(res, code, msg);
+	errback = errback || function(res, code, msg, devMsg) { 
+		exports.respondToError(res, code, msg, devMsg);
 	};
 
 	callback = callback || function(req, res, next, obj) {
@@ -16,7 +19,7 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
 
     schemaObj.save(function(err, obj) {
         if (err) {
-            errback(res, 400, 'Create failed - ' + err);
+            errback(res, 400, 'Create failed', err);
         } else {
             callback(req, res, next, obj);
         }
@@ -24,8 +27,8 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
 };
 
 exports.get = function(req, res, next, schemaModel, id, errback, callback) {
-	errback = errback || function(res, code, msg) { 
-		exports.respondToError(res, code, msg);
+	errback = errback || function(res, code, msg, devMsg) { 
+		exports.respondToError(res, code, msg, devMsg);
 	};
 
 	callback = callback || function(req, res, next, obj) {
@@ -35,20 +38,20 @@ exports.get = function(req, res, next, schemaModel, id, errback, callback) {
     var query  = schemaModel.where({ _id: id });
     query.findOne(function (err, obj) {
         if (err) {
-        	errback(res, '500', 'Server Error');
+        	errback(res, '500', 'Server Error', err);
         }
         else if (obj) {
         	callback(req, res, next, obj); 
         }
         else {
-        	errback(res, '400', 'Could not find');
+        	errback(res, '400', 'Could not find', err);
         }
     });
 };
 
 exports.update = function(req, res, next, schemaModel, id, json, errback, callback) {
-	errback = errback || function(res, code, msg) { 
-		exports.respondToError(res, code, msg);
+	errback = errback || function(res, code, msg, devMsg) { 
+		exports.respondToError(res, code, msg, devMsg);
 	};
 
 	callback = callback || function(req, res, next, obj) {
@@ -59,20 +62,20 @@ exports.update = function(req, res, next, schemaModel, id, json, errback, callba
 
 	schemaModel.findOneAndUpdate(query, json, function(err, doc) {
 			if(err) {
-				errback(res, '500', 'Server Error');
+				errback(res, '500', 'Server Error', err);
 			}
 			else if(doc) {
 				callback(req, res, next, doc);
 			} else {
-				errback(res, '400', 'Could not update');
+				errback(res, '400', 'Could not update', err);
 			}
 		}
 	);
 };
 
 exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
-	errback = errback || function(res, code, msg) { 
-		exports.respondToError(res, code, msg);
+	errback = errback || function(res, code, msg, devMsg) { 
+		exports.respondToError(res, code, msg, devMsg);
 	};
 
 	callback = callback || function(req, res, next, obj) {
@@ -83,20 +86,20 @@ exports.delete = function(req, res, next, schemaModel, id, errback, callback) {
     
     query.findOneAndRemove(function (err, obj) {
         if (err) {
-        	errback(res, '500', 'Server Error');
+        	errback(res, '500', 'Server Error', err);
         }
         if (obj) {
            callback(req, res, next, obj);
         } else {
-        	errback(res, '400', 'Could not delete');
+        	errback(res, '400', 'Could not delete', err);
         }
     });
 };
 
 exports.getAll = function(SchemaModel, req, res, next, errback, callback) {
 
-	errback = errback || function(err) { 
-		exports.respondToError();
+	errback = errback || function(res, code, msg, devMsg) { 
+		exports.respondToError(res, code, msg, devMsg);
 	};
 
 	callback = callback || function(req, res, next, objs) {
@@ -105,7 +108,7 @@ exports.getAll = function(SchemaModel, req, res, next, errback, callback) {
 
 	SchemaModel.find(function(err, objs) {
 		if(err) {
-			errback();
+			errback(res, 400, 'error', err);
 		} else {
 			callback(req, res, next, objs);
 		}

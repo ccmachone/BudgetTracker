@@ -11,7 +11,6 @@ var mongoose  = require('mongoose'),
  * Budget Schema
  */
 var BudgetSchema = new Schema({
-    id: Number, //use _id (it's created by default)
     name: String,
     owners: [Number],
     participants: [Number],

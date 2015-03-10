@@ -10,11 +10,24 @@ var mongoose  = require('mongoose'),
  * Budget Schema
  */
 var EnvelopeSchema = new Schema({
-	id: Number, //use _id (created by default)
-	budgetId: Number,
-	name: String,
-	budgetAmount: Number,
-	currentAmount: Number,
+	budgetId: {
+		type: Schema.ObjectId,
+		ref: 'Budget',
+		required: 'budgetId is required'
+	},
+	name: {
+		type: String,
+		required: 'name is required'
+	},
+
+	budgetAmount: {
+		type: Number,
+		required: 'budgetAmount is required'
+	},
+	currentAmount: {
+		type: Number
+		// default: ?
+	},
 	rollOver: {
 		canRollOver: Boolean,
 		amount: Number,

@@ -34,7 +34,7 @@ describe('BudgetTracker Model Unit Tests:', function() {
 
         before(function(done) {
             budget1 = {
-                id: 2345678, //use _id (it's created by default)
+                _id: mongoose.Types.ObjectId(), //use _id (it's created by default)
                 name: 'Budget Number One',
                 owners: [12345],
                 participants: [],
@@ -46,7 +46,7 @@ describe('BudgetTracker Model Unit Tests:', function() {
             };
 
             budget2 = {
-                id: 8765432, //use _id (it's created by default)
+                _id: mongoose.Types.ObjectId(), //use _id (it's created by default)
                 name: 'Budget Number Two',
                 owners: [54321],
                 participants: [],
@@ -58,8 +58,8 @@ describe('BudgetTracker Model Unit Tests:', function() {
             };
 
             envelope1 = {
-                id: 3456789, //use _id (created by default)
-                budgetId: 2345678,
+                _id: mongoose.Types.ObjectId(), //use _id (created by default)
+                budgetId: budget1._id,
                 name: 'Food',
                 budgetAmount: 400,
                 currentAmount: 300,
@@ -71,8 +71,8 @@ describe('BudgetTracker Model Unit Tests:', function() {
             };
 
             envelope2 = {
-                id: 9876543, //use _id (created by default)
-                budgetId: 8765432,
+                _id: mongoose.Types.ObjectId(), //use _id (created by default)
+                budgetId: budget2._id,
                 name: 'Gas',
                 budgetAmount: 200,
                 currentAmount: 150,
@@ -84,7 +84,7 @@ describe('BudgetTracker Model Unit Tests:', function() {
             };
 
             transaction1 = {
-                id: 1234567, //use _id (created by default)
+                _id: mongoose.Types.ObjectId(), //use _id (created by default)
                 occuredOn: '2015-02-11T02:58:22.294Z',
                 createdOn: '2015-02-11T02:58:22.294Z',
                 envelopeId: 1,
@@ -95,7 +95,7 @@ describe('BudgetTracker Model Unit Tests:', function() {
             };
 
             transaction2 = {
-                id: 7654321, //use _id (created by default)
+                _id: mongoose.Types.ObjectId(), //use _id (created by default)
                 occuredOn: '2015-02-11T02:58:22.294Z',
                 createdOn: '2015-02-11T02:58:22.294Z',
                 envelopeId: 2,
@@ -117,6 +117,8 @@ describe('BudgetTracker Model Unit Tests:', function() {
                     if (!err) {
                         t1id = obj._id;
                         done();
+                    } else {
+                        console.log(err);
                     }
                 }); 
             });
@@ -131,6 +133,8 @@ describe('BudgetTracker Model Unit Tests:', function() {
                     if(!err) {
                         e1id = obj._id;
                         done();
+                    } else {
+                        console.log(err);
                     }
                 });
             });
@@ -145,6 +149,8 @@ describe('BudgetTracker Model Unit Tests:', function() {
                     if(!err){
                         b1id = obj._id;
                         done();
+                    } else {
+                        console.log(err);
                     }
                 });
             });

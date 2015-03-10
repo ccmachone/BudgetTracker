@@ -16,7 +16,7 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
 
     schemaObj.save(function(err, obj) {
         if (err) {
-            errback(res, 400, 'Create failed');
+            errback(res, 400, 'Create failed - ' + err);
         } else {
             callback(req, res, next, obj);
         }

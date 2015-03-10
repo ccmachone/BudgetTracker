@@ -5,8 +5,8 @@ angular.module('mean.system').controller('IndexController', ['$scope', 'Global',
     $scope.global = Global;
     
     $scope.addEnvelope = function(){
-      console.log("Add envelope");
-    }
+      console.log('Add envelope');
+    };
 
    
   }

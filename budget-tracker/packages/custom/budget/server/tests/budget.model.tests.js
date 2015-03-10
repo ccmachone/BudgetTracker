@@ -8,12 +8,12 @@
 
 
 var mongoose = require('mongoose'),
-should = require('should'),
+// should = require('should'),
 Transaction = mongoose.model('Transaction'),
 Budget = mongoose.model('Budget'),
-Envelope = mongoose.model('Envelope'),
-Login = mongoose.model('Login'),
-Profile = mongoose.model('Profile');
+Envelope = mongoose.model('Envelope');
+// Login = mongoose.model('Login'),
+// Profile = mongoose.model('Profile');
 
 /**
  * Globals
@@ -21,9 +21,10 @@ Profile = mongoose.model('Profile');
 var transaction1, transaction2;
 var budget1, budget2;
 var envelope1, envelope2;
-var login1, login2
-var profile1, profile2;
-var t1id, t2id, e1id, e2id, b1id, b2id;
+// var login1, login2
+// var profile1, profile2;
+// var t1id, t2id, e1id, e2id, b1id, b2id;
+var t1id, e1id, b1id;
 
 /**
  * Test Suites

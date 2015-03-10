@@ -24,3 +24,10 @@ exports.update = function(req, res, next, id) {
 exports.delete = function(req, res, next, id) {
 	BaseController.delete(req, res, next, Envelope, id);
 };
+
+exports.getEnvelopes = function(req, res, next, budget_id) {
+	Envelope.find({budgetId : budget_id}, function(err, envelopes) {
+		console.log(envelopes);
+		res.status(200).json(envelopes);
+	});
+};

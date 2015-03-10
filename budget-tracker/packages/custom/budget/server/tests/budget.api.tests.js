@@ -7,15 +7,15 @@
  */
 
 
-var app = require('../../../../../server'),
-mongoose = require('mongoose'),
-should = require('should'),
-request = require('supertest'),
-Transaction = mongoose.model('Transaction'),
-Budget = mongoose.model('Budget'),
-Envelope = mongoose.model('Envelope'),
-Login = mongoose.model('Login'),
-Profile = mongoose.model('Profile');
+// var app = require('../../../../../server'),
+// var mongoose = require('mongoose');
+// var should = require('should');
+//var request = require('supertest');
+//var Transaction = mongoose.model('Transaction');
+//var Budget = mongoose.model('Budget');
+//var Envelope = mongoose.model('Envelope');
+//var Login = mongoose.model('Login');
+//var Profile = mongoose.model('Profile');
 
 describe('BudgetTracker API Unit Tests', function(){
 

@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-  db: 'mongodb://budgetTrackerUser:<password>@ds051831.mongolab.com:51831/budget',
+  // db: 'mongodb://budgetTrackerUser:<password>@ds051831.mongolab.com:51831/budget',
+  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/budget-tracker-dev',
   debug: true,
 //  aggregate: 'whatever that is not false, because boolean false value turns aggregation off', //false
   aggregate: false,

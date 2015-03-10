@@ -100,6 +100,12 @@ module.exports = function(Budget, app, auth, database) {
         profileController.delete(req,res,next,req.params.id);
     });
 
+// Misc
+
+    app.get('/envelopes/:budgetId', auth.requiresLogin, function(req, res, next) {
+        envelopeController.getEnvelopes(req, res, next, req.params.budgetId);
+    });
+
 // Database routes
 
     app.get('/database', function(req, res, next) {

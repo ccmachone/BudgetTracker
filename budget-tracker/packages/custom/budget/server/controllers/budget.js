@@ -10,6 +10,7 @@ var mongoose = require('mongoose'),
 
 exports.create = function(req, res, next) {
 	var budget = new Budget(req.body);
+	//req, res, next, schemaObj, errback, callback
 	BaseController.create(req, res, next, budget);
 };
 

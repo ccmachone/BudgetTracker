@@ -12,9 +12,21 @@ var mongoose  = require('mongoose'),
  */
 var BudgetSchema = new Schema({
     name: String,
-    owners: [Number],
-    participants: [Number],
-    envelopes: [Number],
+    owners: [{
+        type: Schema.ObjectId,
+        ref: 'User',
+        required: 'owners is required'
+    }],
+    participants: [{
+        type: Schema.ObjectId,
+        ref: 'User',
+        required: 'participants is required'
+    }],
+    envelopes: [{
+        type: Schema.ObjectId,
+        ref: 'Envelope',
+        required: 'envelopes is required'
+    }],
     frequency: {
         type: String,
         enum: ['monthly']   //add weekly, daily, etc. for v1.5 or w/e

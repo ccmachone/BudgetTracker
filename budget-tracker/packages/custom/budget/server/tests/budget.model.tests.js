@@ -11,6 +11,7 @@ var mongoose = require('mongoose'),
 // should = require('should'),
 Transaction = mongoose.model('Transaction'),
 Budget = mongoose.model('Budget'),
+User = mongoose.model('User'),
 Envelope = mongoose.model('Envelope');
 // Login = mongoose.model('Login'),
 // Profile = mongoose.model('Profile');
@@ -36,9 +37,9 @@ describe('BudgetTracker Model Unit Tests:', function() {
             budget1 = {
                 _id: mongoose.Types.ObjectId(), //use _id (it's created by default)
                 name: 'Budget Number One',
-                owners: [12345],
-                participants: [],
-                envelopes: [3456789],
+                owners: [mongoose.Types.ObjectId()],
+                participants: [mongoose.Types.ObjectId()],
+                envelopes: [mongoose.Types.ObjectId()],
                 frequency: {
                     type: 'monthly',
                     enum: ['monthly']   //add weekly, daily, etc. for v1.5 or w/e
@@ -48,9 +49,9 @@ describe('BudgetTracker Model Unit Tests:', function() {
             budget2 = {
                 _id: mongoose.Types.ObjectId(), //use _id (it's created by default)
                 name: 'Budget Number Two',
-                owners: [54321],
-                participants: [],
-                envelopes: [9876543],
+                owners: [mongoose.Types.ObjectId()],
+                participants: [mongoose.Types.ObjectId()],
+                envelopes: [mongoose.Types.ObjectId()],
                 frequency: {
                     type: 'monthly',
                     enum: ['monthly']   //add weekly, daily, etc. for v1.5 or w/e

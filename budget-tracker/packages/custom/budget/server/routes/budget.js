@@ -102,6 +102,10 @@ module.exports = function(Budget, app, auth, database) {
 
 // Misc
 
+    app.get('/budgets/:userId', auth.requiresLogin, function(req, res, next) {
+        budgetController.getBudgets(req, res, next, req.params.userId);
+    });
+
     app.get('/envelopes/:budgetId', auth.requiresLogin, function(req, res, next) {
         envelopeController.getEnvelopes(req, res, next, req.params.budgetId);
     });

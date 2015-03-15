@@ -5,9 +5,14 @@ angular.module('mean.system').controller('IndexController', ['$scope', 'Global',
     $scope.global = Global;
     
     $scope.addEnvelope = function(){
-      console.log('Add envelope');
+      console.log(this.envname);
     };
-
+	
+	$scope.oneAtATime = true;
+	$scope.status = {
+		isFirstOpen: false,
+		isFirstDisabled: false
+	};
    
   }
 ]);

@@ -21,7 +21,7 @@ Budget.register(function(app, auth, database) {
     Budget.aggregateAsset('css', 'budget.css');
     Budget.aggregateAsset('js', 'jquery.min.js');
 
-    app.set('views', __dirname + '/server/views');
+    //app.set('views', __dirname + '/server/views');
 
     return Budget;
 });

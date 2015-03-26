@@ -14,7 +14,7 @@ exports.create = function(req, res, next, schemaObj, errback, callback) {
 	};
 
 	callback = callback || function(req, res, next, obj) {
-			res.status(200).json(JSON.stringify(obj._id));
+			res.status(200).json({_id: obj._id});
 	};
 
     schemaObj.save(function(err, obj) {

@@ -16,4 +16,64 @@ angular.module('mean.system').factory('Global', [
     }
     return _this._data;
   }
+]).factory('Envelopes', ['$resource',
+  function($resource) {
+    return $resource('envelopes/:budgetId', {
+      budgetId: '@budgetId'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]).factory('Envelope', ['$resource',
+  function($resource) {
+    return $resource('envelope/:id', {
+      id: '@id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]).factory('Budgets', ['$resource',
+  function($resource) {
+    return $resource('budgets/:id', {
+      id: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]).factory('BudgetService', ['$resource',
+  function($resource) {
+    return $resource('budget/:id', {
+      id: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]).factory('Transactions', ['$resource',
+  function($resource) {
+    return $resource('transactions/:envelopeId', {
+      envelopeId: '@envelopeId'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
+]).factory('Transaction', ['$resource',
+  function($resource) {
+    return $resource('transaction/:id', {
+      id: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
 ]);

@@ -9,14 +9,64 @@
 		<h1>{{global.user.name + '\'s Budget'}}</h1>
 		
 		<accordion ng-model="addenv" close-others="oneAtATime">
-			<accordion-group heading="Add Envelope" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+			<accordion-group  is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+			<accordion-heading>
+            Add Envelope <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isFirstOpen, 'glyphicon-chevron-right': !status.isFirstOpen}"></i>
+        </accordion-heading>
 					<form>
 						Name: <input name="env_name" ng-model="envname" size="30"><br><br>
 						Amount: $<input name="env_amt" ng-model="envamt" size="10"><br><br>
-						<input type="submit" value="Submit" ng-click="addEnvelope()">
+						<input type="submit" value="Add Envelope" class="btn btn-primary" ng-click="addEnvelope()">
 					</form>
 					
 			</accordion-group>
 		</accordion>
+
+		<div ng-show="!envelopes.length">No envelopes</div>
+		<div ng-repeat="envelope in envelopes">
+			<button class="btn-lg btn-default" ng-click="isCollapsed = !isCollapsed"><b>{{envelope.name}}</b> -  Remaining Amount: ${{envelope.currentAmount}} </button>
+			<hr>
+			<div collapse="!isCollapsed">
+				<div class="well well-lg">
+					<h4>Details</h4>
+					Envelope Name: {{envelope.name}} </br>
+					Remaining Amount: ${{envelope.currentAmount}} </br>
+					Original Amount: ${{envelope.budgetAmount}} </br> 
+					Spent so far: ${{envelope.budgetAmount - envelope.currentAmount}} </br></br>
+					<h4>Log Money You've Spent</h4>    
+					<form>
+					  <div class="form-group">
+					Amount: <input ng-model="spentAmount" type="text" class="form-control" /> <br>
+					Description: <input ng-model="description" type="text" class="form-control"/> <br>
+				 
+			
+					<button class="btn btn-primary" ng-click="makeTransaction(envelope, spentAmount, description)">Log Transaction</button> 
+					</div> 
+					</form>
+					<h4>Transaction History</h4>
+					<button class="btn btn-default" ng-click="viewTransactions(envelope)">View Transactions</button> </br>
+
+				
+<div ng-repeat="transaction in envelope.transactionHistory" style="margin-bottom:5px;">
+		Amount Spent: ${{transaction.amount}} <br/>
+		Occured On: {{transaction.occuredOn | date}} <br/>
+		Description: {{transaction.description}} <br/>
+		Type: {{transaction.type}} <br/>  
+		<hr>
+	</div>
+					<h4>Delete Envelope</h4>
+					<button class="btn btn-danger" ng-click="deleteEnvelope(envelope)">Delete Envelope</button></br>
+					
+				</div> 
+			</div>
+			
+		</div>
+
+		
+
+
+
+
+
 	</div>
 </section>

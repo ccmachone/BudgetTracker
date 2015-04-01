@@ -7,5 +7,8 @@ angular.module('mean.budget').controller('BudgetController', ['$scope', 'Global'
     $scope.package = {
       name: 'budget'
     };
+	
+	$scope.username = Global.user.username;
+	console.log(Global.user);
   }
 ]);

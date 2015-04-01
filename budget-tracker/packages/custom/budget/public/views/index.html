@@ -1,5 +1,11 @@
 <div class="" data-ng-controller="BudgetController">
-  <h1>This is your account page. </h1>
+
+	<div ng-if="global.user.name">
+		<h1 ng-model="username">{{global.user.username + '\'s Account'}}</h1>
+			<div style="text-align:center;">Name: {{global.user.name}}</div>
+			<div style="text-align:center;">Username: {{global.user.username}}</div>
+			<div style="text-align:center;">Email: </div>
+	</div>
   
 </div>
 

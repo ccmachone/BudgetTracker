@@ -2,9 +2,24 @@
 
 	<div ng-if="global.user.name">
 		<h1 ng-model="username">{{global.user.username + '\'s Account'}}</h1>
-			<div style="text-align:center;">Name: {{global.user.name}}</div>
-			<div style="text-align:center;">Username: {{global.user.username}}</div>
-			<div style="text-align:center;">Email: </div>
+		
+		<div style="margin-left:auto;margin-right:auto;width:30%;text-align:left;" ng-hide="noEdit">
+			<div>Name: {{ fullname }}</div><br>
+			<div>Username: {{ username }}</div><br>
+			<div>Email: {{ email }}</div><br>
+			<button type="button" ng-click="editAccount()">Edit Account</button> 
+		</div>
+		
+		<div style="margin-left:auto;margin-right:auto;width:30%;text-align:left;" ng-hide="edit">
+					<form>
+						Name: <input type="text" name="new_name" size="30" ng-model="newName"><br><br>
+						Username: <input type="text" name="new_uname" size="30" ng-model="newUsername"><br><br>
+						Email: <input type="text" name="new_email" size="30" ng-model="newEmail"><br><br>
+						<input type="submit" value="Submit Change" class="btn btn-primary" ng-click="updateUser()">
+						<input type="submit" value="Cancel" class="btn btn-primary" ng-click="cancelUpdate()">
+					</form> 
+		</div>
+		
 	</div>
   
 </div>
